@@ -134,7 +134,9 @@ impl GrawoowG530 {
         mcu_handle: DeviceHandle<GlobalContext>,
         ov580_handle: DeviceHandle<GlobalContext>,
     ) -> Result<Self> {
+        #[cfg(not(target_os = "windows"))]
         mcu_handle.set_auto_detach_kernel_driver(true)?;
+        #[cfg(not(target_os = "windows"))]
         ov580_handle.set_auto_detach_kernel_driver(true)?;
 
         mcu_handle.claim_interface(0)?;

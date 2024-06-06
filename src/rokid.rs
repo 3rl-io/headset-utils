@@ -291,6 +291,7 @@ impl RokidAir {
     }
 
     fn new_common(device_handle: DeviceHandle<GlobalContext>) -> Result<Self> {
+        #[cfg(not(target_os = "windows"))]
         device_handle.set_auto_detach_kernel_driver(true)?;
 
         device_handle.claim_interface(

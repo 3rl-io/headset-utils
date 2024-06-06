@@ -645,6 +645,7 @@ impl NrealLightSlamCamera {
     fn new_common(device_handle: rusb::DeviceHandle<rusb::GlobalContext>) -> Result<Self> {
         const UVC_SET_CUR: u8 = 0x01;
         const UVC_VS_COMMIT_CONTROL: u16 = 0x02;
+        #[cfg(not(target_os = "windows"))]
         device_handle.set_auto_detach_kernel_driver(true)?;
         device_handle.claim_interface(Self::VIDEO_INTERFACE)?;
         device_handle.write_control(

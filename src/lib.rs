@@ -34,6 +34,7 @@
 //! All of them are enabled by default, which may bring in some unwanted dependencies if you
 //! only want to support a specific type.
 
+use std::backtrace::Backtrace;
 use std::f32::consts::PI;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex, PoisonError};
@@ -552,6 +553,8 @@ impl From<std::io::Error> for Error {
 #[cfg(feature = "rusb")]
 impl From<rusb::Error> for Error {
     fn from(e: rusb::Error) -> Self {
+        //println!("Custom backtrace: {}", Backtrace::force_capture());
+        //println!("rusb - {}", e);
         Error::UsbError(e)
     }
 }
@@ -559,6 +562,8 @@ impl From<rusb::Error> for Error {
 #[cfg(feature = "hidapi")]
 impl From<hidapi::HidError> for Error {
     fn from(e: hidapi::HidError) -> Self {
+        //println!("Custom backtrace: {}", Backtrace::force_capture());
+        //println!("hidapi - {}", e);
         Error::HidError(e)
     }
 }
