@@ -16,11 +16,11 @@ sudo apt install cargo libudev-dev libstdc++-12-dev
 cargo update
 ```
 
-Add the udev scripts to your udev config, so the glasses are available without sudo. You may need to restart the terminal after this:
+Add the udev scripts to your udev config, so the glasses are available without sudo:
 
 ```
 sudo cp udev/* /etc/udev/rules.d/
-sudo udevadm control --reload
+sudo udevadm control --reload-rules && sudo udevadm trigger
 ```
 
 Build and ensure that euler angles are printing to console:
